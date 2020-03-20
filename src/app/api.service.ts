@@ -14,7 +14,7 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient) { }
 
-  handleError(error: HttpErrorResponse) {
+  private handleError(error: HttpErrorResponse) {
     let msg = '';
     if (error.error instanceof ErrorEvent) {
       msg = `Error: ${error.error.message}`;
@@ -25,14 +25,15 @@ export class ApiService {
     return throwError(msg);
   }
 
-  get(path, id?) {
-    let apiPath = `${this.host}/${path}`;
-    apiPath += id ? `/${id}` : '';
+  get(path) {
+    const apiPath = `${this.host}/${path}`;
+    // apiPath += id ? `/${id}` : '';
     return this.httpClient.get(apiPath).pipe(catchError(this.handleError));
   }
 
   post(path, body) {
-    return this.httpClient.post(`${this.host}/${path}`, body).pipe(catchError(this.handleError));
+    const apiPath = `${this.host}/${path}`;
+    return this.httpClient.post(apiPath, body).pipe(catchError(this.handleError));
   }
 
   delete(path, id) {

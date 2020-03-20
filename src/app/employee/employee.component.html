@@ -29,7 +29,7 @@
   </div>
 
   <div style="width: 200px; border-left: solid black 1px;">
-    <ul style="list-style-type: none;font-size:.8em;">
+    <ul style="list-style-type: none;font-size:.8em;margin-left:0;padding-left:10px;">
       <li *ngFor="let emp of employees" style="margin-bottom: 3px;">
         {{ emp.firstName }} {{ emp.lastName }}
         {{ emp.dependents.length > 0 ? "- (" + emp.dependents.length + ")" : "" }}

@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import {Dependent, Employee} from './employee.service';
+import {Injectable} from '@angular/core';
+import {Employee} from './employee.service';
 import {environment} from '../environments/environment';
 
 import {filter} from 'lodash';
@@ -7,7 +7,7 @@ import {filter} from 'lodash';
 interface Discount {
   type: string;
   param: string;
-  unit: 'pct' | 'flat';
+  unit: string; // 'pct'
   val: number;
 }
 
@@ -19,8 +19,6 @@ export class BenefitsService {
   benefitsPerYearDE = environment.benefitsPerYearDE;
   discounts = environment.benefitDiscounts;
 
-
-
   constructor() { }
 
   calculate(employees: Array<Employee>): number {
@@ -31,7 +29,7 @@ export class BenefitsService {
     return total;
   }
 
-  private calculateEmployee(employee: Employee): number {
+  calculateEmployee(employee: Employee): number {
     let total = 0;
     let depTotal = 0;
     total += this.benefitsPerYearEE;
@@ -44,21 +42,21 @@ export class BenefitsService {
     return total;
   }
 
-  private applyEmployeeDiscounts(employee: Employee, total: number): number {
+  applyEmployeeDiscounts(employee: Employee, total: number): number {
     filter(this.discounts, ['type', 'name']).forEach((discount) => {
       total = this.applyNameDiscount(employee.firstName, discount, total);
     });
     return total;
   }
 
-  private applyDependentDiscounts(dependent: string, total: number): number {
+  applyDependentDiscounts(dependent: string, total: number): number {
     filter(this.discounts, ['type', 'name']).forEach((discount) => {
       total = this.applyNameDiscount(dependent, discount, total);
     });
     return total;
   }
 
-  private applyNameDiscount(name: string, discount: Discount, total: number): number {
+  applyNameDiscount(name: string, discount: Discount, total: number): number {
     if (name[0].toLowerCase() === discount.param.toLowerCase()) {
       return discount.unit === 'pct' ? total * (1 - (discount.val / 100)) : total;
     }

@@ -20,16 +20,8 @@ export class EmployeeService {
     return this.apiService.get(this.root);
   }
 
-  getEmployee(id: number) {
-    return this.apiService.get(this.root, id);
-  }
-
   createEmployee(body) {
     return this.apiService.post(this.root, body);
-  }
-
-  deleteEmployee(id: number) {
-    return this.apiService.delete(this.root, id);
   }
 
 }

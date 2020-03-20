@@ -1,10 +1,14 @@
-<p>This happens to be the most fantastic employee entry system.</p>
-<p>Given that all your employees make ${{env.payRate}} / pay period and there are {{env.payPeriods}} pay periods a year</p>
+<div style="display: flex;flex-direction: column;">
+  <div>
+    <p>This happens to be the most fantastic employee entry system.</p>
+    <p>Given that all your employees make ${{env.payRate}} / pay period and there are {{env.payPeriods}} pay periods a
+      year</p>
 
-<p>You currently have {{ employeeCount }} employee(s) with a total of {{ dependentCount }} dependent(s)</p>
+    <p>You currently have {{ employeeCount }} employee(s) with a total of {{ dependentCount }} dependent(s)</p>
 
-<h3>Total Cost of Salary :: {{ salaryTotal | currency }}</h3>
-<h3>Total Cost Of Benefits :: {{ benefitTotal | currency }}</h3>
-<h2>Total Annual Cost :: {{ salaryTotal + benefitTotal | currency }}</h2>
-
-<app-employee (onEmployeesUpdate)="employeesUpdate($event)"></app-employee>
+    <h3>Total Cost of Salary :: {{ salaryTotal | currency }}</h3>
+    <h3>Total Cost Of Benefits :: {{ benefitTotal | currency }}</h3>
+    <h2>Total Annual Cost :: {{ salaryTotal + benefitTotal | currency }}</h2>
+  </div>
+  <app-employee (onEmployeesUpdate)="employeesUpdate($event)"></app-employee>
+</div>
