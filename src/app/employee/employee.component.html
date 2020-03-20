@@ -1,1 +1,40 @@
-<p>employee works!</p>
+<div style="display: flex;justify-content: center;border-top: solid black 1px;">
+  <div [formGroup]="employeeForm" style="flex-grow: 2">
+    <div>
+      <h3>Employee :: {{ employeeForm.status }}</h3>
+      <label>
+        First Name:
+        <input type="text" formControlName="firstName" required/>
+      </label>
+      <label>
+        Last Name:
+        <input type="text" formControlName="lastName" required/>
+      </label>
+      <div formArrayName="dependents" style="margin-bottom: 1em;">
+        <h4>
+          Dependents
+          <button (click)="addDependent()">+</button>
+        </h4>
+
+        <ul *ngFor="let dep of dependents.controls; let i = index" style="list-style-type: none">
+          <li>
+            <label>
+              Name: <input type="text" [formControlName]="i" required/>
+            </label>
+          </li>
+        </ul>
+      </div>
+      <button (click)="addEmployee()">Add Employee</button>
+    </div>
+  </div>
+
+  <div style="width: 200px; border-left: solid black 1px;">
+    <ul style="list-style-type: none;font-size:.8em;">
+      <li *ngFor="let emp of employees" style="margin-bottom: 3px;">
+        {{ emp.firstName }} {{ emp.lastName }}
+        {{ emp.dependents.length > 0 ? "- (" + emp.dependents.length + ")" : "" }}
+      </li>
+    </ul>
+  </div>
+</div>
+
